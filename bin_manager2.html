@@ -14,7 +14,7 @@
 
 
 <table id="excelDataTable" border="1" width=90%>
-<thead><th>Vehicle Name</th><th>Date</th><th>BIN S/N</th><th>Acutal Weight</th><th>Total Weight</th><th>Daily Count</th><th>Total Count</th><th>Route</th></thead>
+<thead><th>Vehicle Name</th><th>Date</th><th>BIN S/N</th><th>Actual Weight</th><th>Total Weight</th><th>Daily Count</th><th>Total Count</th><th>Route</th></thead>
     <tbody id = "table_tbody"></tbody>    
     
     </table>
@@ -42,7 +42,7 @@
                  $.ajax({
                           type: "GET",
                           dataType: "json",
-                          url:  "https://cloudfleet.datafix.ae/comGpsGate/api/v.1/applications/6/events?FromIndex=0&PageSize=1000&Date=" + query_date + "&RuleId=9",
+                          url:  "https://cloudfleet.datafix.ae/comGpsGate/api/v.1/applications/6/events?FromIndex=0&PageSize=1000&Date=" + query_date + "&UserId=32&RuleId=12",
                           headers: {"Authorization": '7YRsG9Kk3vT0gCbyjooReV1ZGJIwoAGDJOqGwi%2fmqkJ52ts304pJTkpUj4mLVVA7'},
                           success: function(json) {
                          
@@ -72,7 +72,7 @@
                     $.ajax({
                           type: "GET",
                           dataType: "json",
-                          url:  "https://cloudfleet.datafix.ae/comGpsGate/api/v.1/applications/6/events?FromIndex=0&PageSize=1000&Date=" + query_date + "&RuleId=9",
+                          url:  "https://cloudfleet.datafix.ae/comGpsGate/api/v.1/applications/6/events?FromIndex=0&PageSize=1000&Date=" + query_date + "&UserId=32&RuleId=12",
                           headers: {"Authorization": '7YRsG9Kk3vT0gCbyjooReV1ZGJIwoAGDJOqGwi%2fmqkJ52ts304pJTkpUj4mLVVA7'},
                           success: function(json) {
                          
