@@ -1,0 +1,105 @@
+
+
+<meta charset="UTF-8" />
+<html>
+    <head>
+        <title data-lang="playback"></title>        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+
+    <body>
+        
+        
+        <h1 style="margin-top:2px;margin-left:2px;">Bin Manager</h1>
+
+
+<table id="excelDataTable" border="1" width=90%>
+<thead><th>Vehicle Name</th><th>Date</th><th>BIN S/N</th><th>Acutal Weight</th><th>Total Weight</th><th>Daily Count</th><th>Total Count</th><th>Route</th></thead>
+    <tbody id = "table_tbody"></tbody>    
+    
+    </table>
+</body>
+
+
+
+        
+        
+        <script type="text/javascript">
+ 
+            
+         var result = "";    
+          
+         var today = new Date();
+         var query_date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        
+          jQuery(document).ready(function($) {
+        
+
+             
+          
+           
+
+                 $.ajax({
+                          type: "GET",
+                          dataType: "json",
+                          url:  "https://cloudfleet.datafix.ae/comGpsGate/api/v.1/applications/6/events?FromIndex=0&PageSize=1000&Date=" + query_date + "&RuleId=9",
+                          headers: {"Authorization": '7YRsG9Kk3vT0gCbyjooReV1ZGJIwoAGDJOqGwi%2fmqkJ52ts304pJTkpUj4mLVVA7'},
+                          success: function(json) {
+                         
+                                $("#tbodyid").empty();
+
+                                    for (var i=0; i<json.length; i++) {
+                                        var row$ = $('<tr/>');
+                                       for (var key in json[i].arguments) {
+                                               var cellValue = json[i].arguments[key].siValue.split('#');
+
+                                               for(var j = 0; j < cellValue.length; j++) {
+
+                                               row$.append($('<td/>').html(cellValue[j]));
+                                               }
+
+                                       }
+                                       $("#excelDataTable").append(row$); 
+                                    }
+                              
+                            }                 
+                      });
+
+
+        }); // jQuery(function($) END
+
+              setInterval(function() {
+                    $.ajax({
+                          type: "GET",
+                          dataType: "json",
+                          url:  "https://cloudfleet.datafix.ae/comGpsGate/api/v.1/applications/6/events?FromIndex=0&PageSize=1000&Date=" + query_date + "&RuleId=9",
+                          headers: {"Authorization": '7YRsG9Kk3vT0gCbyjooReV1ZGJIwoAGDJOqGwi%2fmqkJ52ts304pJTkpUj4mLVVA7'},
+                          success: function(json) {
+                         
+                                $("#table_tbody").empty();
+
+                                    for (var i=0; i<json.length; i++) {
+                                        var row$ = $('<tr/>');
+                                       for (var key in json[i].arguments) {
+                                               var cellValue = json[i].arguments[key].siValue.split('#');
+
+                                               for(var j = 0; j < cellValue.length; j++) {
+
+                                               row$.append($('<td/>').html(cellValue[j]));
+                                               }
+
+                                       }
+                                       $("#excelDataTable").append(row$); 
+                                    }
+                              
+                            }                 
+                      });
+     
+                  
+              }, 5000);
+        
+
+
+        </script>
+    </body>
+</html>
